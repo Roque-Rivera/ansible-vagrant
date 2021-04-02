@@ -1,0 +1,28 @@
+---
+- name: Configuración de una máquina para ansible
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: apt install
+    apt:
+      name: 
+      - python3-pip
+      - htop
+      - curl
+      - python-is-python3
+      
+      state: present
+      update_cache: yes
+      cache_valid_time: 3600
+  
+  - name: Set a new hostname
+    ansible.builtin.hostname:
+      name: ansible-rrg
+  
+  - name: Install pip packages
+    pip: 
+      name:
+      - setuptools
+      - virtualenv
+      - ansible-lint    
